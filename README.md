@@ -194,6 +194,12 @@ Set-Theme paradox
 
 ![Pararussel Theme][img-theme-pararussell]
 
+### Material
+
+![Material Theme][img-theme-material]
+![Material Theme][img-theme-material2]
+
+
 ## Creating your own theme
 
 If you want to create a theme it can be done rather easily by adding a `mytheme.psm1` file in the folder indicated in `$ThemeSettings.MyThemesLocation` (the folder defaults to `~\Documents\WindowsPowerShell\PoshThemes`, feel free to change it).
@@ -290,3 +296,5 @@ $stackCount = (&$getStackContext).count
 [img-theme-fish]: img/fish.png
 [img-theme-robbyrussell]: img/robbyrussel.png
 [img-theme-pararussell]: img/pararussel.png
+[img-theme-material]: img/material.png
+[img-theme-material2]: img/material2.png
