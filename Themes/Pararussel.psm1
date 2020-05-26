@@ -8,17 +8,19 @@ function Write-Theme {
         $with
     )
 
-    #check the last command state and indicate if failed
-    $promtSymbolColor = $sl.Colors.PromptSymbolColor
+    #check the last command state and indicate if failed and change the colors of the arrows
     If ($lastCommandFailed) {
-        $promtSymbolColor = $sl.Colors.WithForegroundColor
+        $prompt += Write-Prompt -Object (
+            [char]::ConvertFromUtf32(0x276F)) -ForegroundColor  $sl.Colors.WithForegroundColor
+        $prompt += Write-Prompt -Object (
+            [char]::ConvertFromUtf32(0x276F) +"  ") -ForegroundColor $sl.Colors.WithForegroundColor
+    }Else{
+        $prompt += Write-Prompt -Object (
+            [char]::ConvertFromUtf32(0x276F)) -ForegroundColor  $sl.Colors.GitNoLocalChangesAndAheadColor
+        $prompt += Write-Prompt -Object (
+            [char]::ConvertFromUtf32(0x276F) +"  ") -ForegroundColor $sl.Colors.PromptSymbolColor
     }
-
-    # Writes the postfixes to the prompt
-    $prompt += Write-Prompt -Object (
-        [char]::ConvertFromUtf32(0x276F)) -ForegroundColor  $sl.Colors.GitNoLocalChangesAndAheadColor
-    $prompt += Write-Prompt -Object (
-        [char]::ConvertFromUtf32(0x276F) +"  ") -ForegroundColor $promtSymbolColor 
+    
 
     # Writes the drive portion
     $drive = $sl.PromptSymbols.HomeSymbol
@@ -40,7 +42,18 @@ function Write-Theme {
     if ($with) {
         $prompt += Write-Prompt -Object "$($with.ToUpper()) " -BackgroundColor $sl.Colors.WithBackgroundColor -ForegroundColor $sl.Colors.WithForegroundColor
     }
+
+    $timeStamp = Get-Date -UFormat %R
+    $clock = [char]::ConvertFromUtf32(0x25F7)
+    $timestamp = "$clock $timeStamp"
+
+    if ($status) {
+        $timeStamp = Get-TimeSinceLastCommit
+    }
+    $prompt += Set-CursorForRightBlockWrite -textLength $timestamp.Length
+    $prompt += Write-Prompt $timeStamp -ForegroundColor $sl.Colors.DriveForegroundColor
     $prompt += Set-Newline
+
     $prompt += Write-Prompt -Object ($sl.PromptSymbols.PromptIndicator) -ForegroundColor $sl.Colors.PromptBackgroundColor
     
     $prompt += '  '
