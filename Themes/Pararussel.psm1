@@ -53,6 +53,7 @@ function Get-TimeSinceLastCommit {
 
 $sl = $global:ThemeSettings #local settings
 $sl.PromptSymbols.PromptIndicator = '👁'
+$sl.PromptSymbols.HomeSymbol = '🏠'
 $sl.Colors.PromptSymbolColor = [ConsoleColor]::Green
 $sl.Colors.PromptHighlightColor = [ConsoleColor]::Blue
 $sl.Colors.DriveForegroundColor = [ConsoleColor]::Cyan
