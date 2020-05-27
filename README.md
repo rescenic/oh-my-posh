@@ -199,6 +199,10 @@ Set-Theme paradox
 ![Material Theme][img-theme-material]
 ![Material Theme][img-theme-material2]
 
+### Star
+
+![Star Theme][img-theme-star]
+
 
 ## Creating your own theme
 
@@ -298,3 +302,4 @@ $stackCount = (&$getStackContext).count
 [img-theme-pararussell]: img/pararussel.png
 [img-theme-material]: img/material.png
 [img-theme-material2]: img/material2.png
+[img-theme-star]: img/star.png
