@@ -203,6 +203,10 @@ Set-Theme paradox
 
 ![Star Theme][img-theme-star]
 
+### Zash
+
+![Star Theme][img-theme-zash]
+
 
 ## Creating your own theme
 
@@ -303,3 +307,4 @@ $stackCount = (&$getStackContext).count
 [img-theme-material]: img/material.png
 [img-theme-material2]: img/material2.png
 [img-theme-star]: img/star.png
+[img-theme-zash]: img/zash.png
