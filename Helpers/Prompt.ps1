@@ -92,20 +92,32 @@ function Test-IsVCSRoot {
         $Path
     )
 
-    return (Test-Path -Path "$($Path)\.git") -Or (Test-Path -Path "$($Path)\.hg") -Or (Test-Path -Path "$($Path)\.svn")
+    return (Test-Path -LiteralPath "$($Path)\.git") -Or (Test-Path -LiteralPath "$($Path)\.hg") -Or (Test-Path -LiteralPath "$($Path)\.svn")
 }
 
 function Get-FullPath {
     param(
         [Parameter(Mandatory = $true)]
         [System.Management.Automation.PathInfo]
-        $dir
+        $dir,
+
+        [Parameter(Mandatory = $false)]
+        [switch]
+        $noHomeAbbreviation
     )
 
     if ($dir.path -eq "$($dir.Drive.Name):\") {
         return "$($dir.Drive.Name):"
     }
-    $path = $dir.path.Replace((Get-Home), $sl.PromptSymbols.HomeSymbol).Replace('\', $sl.PromptSymbols.PathSeparator)
+
+    if ($noHomeAbbreviation.IsPresent) {
+        $path = $dir.path
+    }
+    else {
+        $path = $dir.path.Replace((Get-Home), $sl.PromptSymbols.HomeSymbol)
+    }
+    $path = $path.Replace('\', $sl.PromptSymbols.PathSeparator)
+
     return $path
 }
 
